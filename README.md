@@ -168,7 +168,33 @@ For protected endpoints, the client must send the token in the `Authorization` h
 ```text
 Authorization: Bearer <JWT-token>
 ```
-The JWT contains the user's ID, role, and expiration time. Public endpoints do not require authentication.
+
+**JWT structure**
+ 
+A JWT consists of three parts, separated by dots (`header.payload.signature`):
+ 
+**Header:**
+ 
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+ 
+**Payload:**
+ 
+```json
+{
+  "sub": "123",
+  "role": "USER",
+  "exp": 1753456789
+}
+```
+ 
+**Signature** - generated from the header, payload, and a secret key, ensuring the token hasn't been tampered with.
+ 
+Public endpoints do not require authentication.
 
 ## Error Format
 All API errors return the same JSON structure:
